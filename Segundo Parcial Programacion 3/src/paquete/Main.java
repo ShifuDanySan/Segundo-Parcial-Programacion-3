@@ -6,6 +6,7 @@ public class Main {
 		// TODO Apéndice de método generado automáticamente
 		
 		///EN ESPERA DEL PARCIAL///
+		///SEGUIMOS EN ESPERA DEL PARCIAL///
 
 	}
 
