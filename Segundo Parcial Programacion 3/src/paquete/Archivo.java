@@ -18,33 +18,36 @@ public class Archivo {
 			texto = JOptionPane.showInputDialog("Ingrese el texto\n");
 			texto += "\r\n";
 			archivo.write(texto);
-			archivo.close();// cierro el archivo
-		} catch (IOException e) {// controlo excepciones
+			archivo.close();
+		} catch (IOException e) {
 			System.out.println("No se encuentra el archivo");
 		}
 	}
 
 	public String leeArchivo() {
+		this.cantidadLineasArchivo = 0;
 		String texto = "";
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(this.direccion));
 			String temp = "";
 			String bfRead;
-			while ((bfRead = bf.readLine()) != null) {// Este while avanza linea por linea
-				temp += bfRead;// guardo el contenido de la linea del archivo en la variable temporal
-				temp += "\n";/*
-								 * guardo en la variable String temporal un salto de linea antes de guardar la
-								 * siguente linea en esta variable
-								 */
+			while ((bfRead = bf.readLine()) != null) {
+				this.cantidadLineasArchivo++;
+				temp += bfRead;
+				temp += "\n";
+
 			}
-			texto = temp;// aqui asigno el contenido de temp a la variable String que retorno
-			bf.close();// cierro el archivo
-		} catch (IOException e) {// controlo excepciones
+			bf.close();
+		} catch (IOException e) {
 			System.out.println("No se encuentra el archivo");
 		}
 		return texto;
 	}
-	
-	
-	String direccion;
+
+	public int cantidadLineasArchivo() {
+		return this.cantidadLineasArchivo;
+	}
+
+	private String direccion = "";
+	private int cantidadLineasArchivo = 0;
 }
