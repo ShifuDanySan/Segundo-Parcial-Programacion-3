@@ -12,10 +12,10 @@ public class Archivo {
 		this.direccion = direccion;
 	}
 
-	public void escribeArchivo() {
+	public void escribeArchivo(char salida) {
 		try (FileWriter archivo = new FileWriter(this.direccion, true)) {
 			String texto = "";
-			texto = JOptionPane.showInputDialog("Ingrese el texto\n");
+			texto+=salida;
 			texto += "\r\n";
 			archivo.write(texto);
 			archivo.close();
@@ -47,7 +47,31 @@ public class Archivo {
 	public int cantidadLineasArchivo() {
 		return this.cantidadLineasArchivo;
 	}
+	
+	
+	public void guardaDatosDeArchivo() {
 
+		try {
+			BufferedReader bf = new BufferedReader(new FileReader(this.direccion));
+			String linea = "";
+			this.computadoras = new estadoComputadoras[this.cantidadLineasArchivo];
+			int i = 0;
+			while ((linea = bf.readLine()) != null) {
+				computadoras[i] = new estadoComputadoras();
+				computadoras[i].cargarDatosComputadora(linea);
+				linea = "";
+				i++;
+			}
+			bf.close();
+		} catch (IOException e) {
+			System.out.println("No se encuentra el archivo");
+		}
+	}
+	
+	public estadoComputadoras[] devuelveEstadoComputadora(){
+		return this.computadoras;
+	}
 	private String direccion = "";
 	private int cantidadLineasArchivo = 0;
+	private estadoComputadoras computadoras[];
 }
